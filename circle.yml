@@ -4,6 +4,6 @@ dependencies:
     - chmod -x ./gradlew
 test:
   override:
-    - ./gradlew assembleDebug
+    - gradle assembleDebug
   post:
     - cp -r build/reports/* $CIRCLE_TEST_REPORTS/
