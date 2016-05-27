@@ -10,9 +10,11 @@ dependencies:
 
 test:
   override:
-    - if [[ ! -z $CI_PULL_REQUEST ]] ; then <long-running-command> ; fi
-    - ./gradlew clean assemble -PdisablePreDex
+    - if [ "$CIRCLE_PULL_REQUEST" = false ] ;
+    then
+    #- ./gradlew clean assemble -PdisablePreDex
     - ./gradlew test
+     ; fi
     # start the emulator
     # - emulator -avd circleci-android22 -no-audio -no-window:
     #     background: true
