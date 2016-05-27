@@ -1,17 +1,24 @@
 general:
   artifacts:
     - "app/build/reports/tests"
+#  branches:
+#   only:
+#   - master
 
-dependencies:
-  override:
-    - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2,android-23"
-    - chmod +x gradlew
-    - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
-test:
-  override:
-    - if [-z "$CIRCLE_PULL_REQUEST" ]; then ./gradlew test; fi
-    - echo ${CIRCLE_PULL_REQUEST##*/}
+
+#dependencies:
+  #override:
+    # echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2,android-23"
+    # chmod +x gradlew
+    # ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+
+#test:
+#  override:
+    # ./gradlew test
+    #- if [-z "$CIRCLE_PULL_REQUEST" ]; then ./gradlew test; fi
+    #- echo ${CIRCLE_PULL_REQUEST##*/}
+
     #- ./gradlew clean assemble -PdisablePreDex
     #- ./gradlew test
     # start the emulator
@@ -26,6 +33,3 @@ test:
     #- cp -r build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
     #- cp -r build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
-  post:
-      - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-      - find . -type f -regex ".*/test-results/*/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
