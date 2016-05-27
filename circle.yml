@@ -1,10 +1,15 @@
-
 dependencies:
   override:
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+    - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2,android-23"
     - chmod +x gradlew
     - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
 test:
   override:
-    - ./gradlew assembleDebug
+    # ./gradlew clean assemble -PdisablePreDex
+    # run tests  against the emulator.
+    - ./gradlew connectedAndroidTest
+    # copy the build outputs to artifacts
+    - cp -r my-project/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r my-project/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
