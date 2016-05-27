@@ -1,6 +1,9 @@
 general:
   artifacts:
     - "app/build/reports/tests"
+  branches:
+   only:
+    - master
 
 dependencies:
   override:
