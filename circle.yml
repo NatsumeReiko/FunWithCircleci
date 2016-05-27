@@ -1,9 +1,6 @@
 general:
   artifacts:
     - "app/build/reports/tests"
-  branches:
-   only:
-    - master
 
 dependencies:
   override:
@@ -13,8 +10,10 @@ dependencies:
 
 test:
   override:
-    - ./gradlew clean assemble -PdisablePreDex
-    - ./gradlew test
+    - if [[ ! -z "$CIRCLE_PULL_REQUEST" ]]; then ./gradlew test; fi
+    - echo ${CIRCLE_PULL_REQUEST##*/}
+    #- ./gradlew clean assemble -PdisablePreDex
+    #- ./gradlew test
     # start the emulator
     # - emulator -avd circleci-android22 -no-audio -no-window:
     #     background: true
