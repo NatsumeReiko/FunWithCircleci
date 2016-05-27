@@ -1,9 +1,9 @@
 general:
   artifacts:
     - "app/build/reports/tests"
-#  branches:
-#   only:
-#   - master
+  branches:
+   only:
+   - master
 
 
 
