@@ -10,7 +10,8 @@ dependencies:
 
 test:
   override:
-    - if [[ ! -z $CIRCLE_PULL_REQUEST ]]; then ./gradlew test; fi
+    - if [[ ! -z "$CIRCLE_PULL_REQUEST" ]]; then ./gradlew test; fi
+    - echo ${CIRCLE_PULL_REQUEST##*/}
     #- ./gradlew clean assemble -PdisablePreDex
     #- ./gradlew test
     # start the emulator
