@@ -1,9 +1,6 @@
 general:
   artifacts:
     - "app/build/reports/tests"
-  branches:
-   only:
-    - master
 
 dependencies:
   override:
@@ -13,6 +10,7 @@ dependencies:
 
 test:
   override:
+    - if [[ ! -z $CI_PULL_REQUEST ]] ; then <long-running-command> ; fi
     - ./gradlew clean assemble -PdisablePreDex
     - ./gradlew test
     # start the emulator
