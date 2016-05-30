@@ -1,5 +1,3 @@
-set -eu
-
 echo 'check pull request'
 
 if [ "$CI_PULL_REQUEST" == false ] || [ -z "$CI_PULL_REQUEST" ]; then
